@@ -28,6 +28,7 @@ set background=dark
 
 " Vim Plugin Mappings
 let mapleader = " "
+vnoremap <leader>p :w ! python3<CR>
 
 " ########################################################################
 " ######## NERDTree
