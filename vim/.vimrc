@@ -38,6 +38,7 @@ nnoremap <Leader>nt :NERDTree<CR>
 nnoremap <Leader>nf :NERDTreeFind <CR>
 let NERDTreeWinPos="left"
 let NERDTreeWinSize=30
+let NERDTreeShowHidden=1
 
 " ########################################################################
 " ######## Max
