@@ -28,6 +28,7 @@ set background=dark
 
 " Vim Plugin Mappings
 let mapleader = " "
+vnoremap <leader>p :w ! python3<CR>
 
 " ########################################################################
 " ######## NERDTree
@@ -37,6 +38,7 @@ nnoremap <Leader>nt :NERDTree<CR>
 nnoremap <Leader>nf :NERDTreeFind <CR>
 let NERDTreeWinPos="left"
 let NERDTreeWinSize=30
+let NERDTreeShowHidden=1
 
 " ########################################################################
 " ######## Max
