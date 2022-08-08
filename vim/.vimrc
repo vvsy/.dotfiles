@@ -18,6 +18,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'szw/vim-maximizer'
 Plug 'Valloric/YouCompleteMe'
 Plug 'vim-syntastic/syntastic'
+Plug 'camspiers/animate.vim'
+Plug 'camspiers/lens.vim'
 
 call plug#end()
 " pluugin end ===
@@ -29,6 +31,11 @@ set background=dark
 " Vim Plugin Mappings
 let mapleader = " "
 vnoremap <leader>p :w ! python3<CR>
+"" lens.vim
+nnoremap <Leader> <Up>    :call animate#window_delta_height(10)<CR>
+nnoremap <Leader> <Down>  :call animate#window_delta_height(-10)<CR>
+nnoremap <Leader> <Left>  :call animate#window_delta_width(10)<CR>
+nnoremap <Leader> <Right> :call animate#window_delta_width(-10)<CR>
 
 " ########################################################################
 " ######## NERDTree
