@@ -35,18 +35,28 @@ require("lazy").setup({
 	{
 		"nvim-tree/nvim-tree.lua",
 		version = "*",
+        -- dependencies = 'nvim-tree/nvim-web-devicons'
 		lazy = false,
-		requires = {
-			"nvim-tree/nvim-web-devicons",
-		},
 		config = function()
-			require("nvim-tree").setup {}
+			require("nvim-tree").setup {
+                renderer = {
+                    icons = {
+                        show = {
+                            file = false,
+                            folder = false,
+                        }
+                    }
+                }
+            }
 		end,
+
 	},
 
     -- buffer above
 	{
-		'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'
+		'akinsho/bufferline.nvim',
+        version = "*",
+        -- dependencies = 'nvim-tree/nvim-web-devicons'
 	},
 
     -- quick comment
