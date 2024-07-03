@@ -10,3 +10,7 @@ vim.keymap.set("n", "<leader>x", ":bd<cr>")
 vim.keymap.set("n", '<leader>q', ':lua vim.lsp.buf.definition()<CR>')
 vim.keymap.set('n', '<leader>q|', ':vsplit | lua vim.lsp.buf.definition()<CR>')
 vim.keymap.set('n', '<leader>q-', ':belowright split | lua vim.lsp.buf.definition()<CR>')
+
+-- Expand pane horizontally
+vim.keymap.set('n', '<leader><leader>', ':vertical resize +4<CR>', { noremap = true, silent = true })
+

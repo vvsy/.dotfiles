@@ -22,7 +22,9 @@ require("lazy").setup({
 
     -- color scheme
 	{
-		"ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts = ...
+        "zenbones-theme/zenbones.nvim",
+		dependencies = { 'rktjmp/lush.nvim' },
+
 	},
 
     -- fuzzy finder
@@ -139,7 +141,7 @@ require("lazy").setup({
             })
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
             -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-            require('lspconfig')['pyright'].setup {
+            require('lspconfig').pyright.setup {
                 capabilities = capabilities,
                 handlers = {
                     ["textDocument/publishDiagnostics"] = function()
@@ -158,6 +160,24 @@ require("lazy").setup({
             require("lspconfig").lua_ls.setup({
                 capabilities = capabilities
             })
+            -- require("prettier").lua_ls.setup({
+            --     capabilities = capabilities,
+            --     bin = 'prettier', -- or `'prettierd'` (v0.23.3+)
+            --     filetypes = {
+            --         "css",
+            --         "graphql",
+            --         "html",
+            --         "javascript",
+            --         "javascriptreact",
+            --         "json",
+            --         "less",
+            --         "markdown",
+            --         "scss",
+            --         "typescript",
+            --         "typescriptreact",
+            --         "yaml",
+            --     },
+            -- })
 
         end
     },

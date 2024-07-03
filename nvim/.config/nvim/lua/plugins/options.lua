@@ -1,7 +1,8 @@
-vim.cmd("colorscheme gruvbox")
+-- termguicolors required by zenbones
+vim.opt.termguicolors = true
+vim.cmd("colorscheme zenbones")
 
 -- bufferline
-vim.opt.termguicolors = true
 require("bufferline").setup{}
 
 -- diagnostic
