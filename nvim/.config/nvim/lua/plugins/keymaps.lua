@@ -18,4 +18,4 @@ vim.keymap.set("n", "<leader>ll", function()
 end
 )
 
--- vim.keymap.set('n', '<leader>mp', ":MarldownPreviewToggle<cr>")
+vim.keymap.set('n', '<leader>mm', ":MarkdownPreviewToggle<cr>")
