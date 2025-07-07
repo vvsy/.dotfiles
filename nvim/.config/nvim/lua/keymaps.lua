@@ -14,3 +14,11 @@ vim.keymap.set('n', '<leader>q-', ':belowright split | lua vim.lsp.buf.definitio
 -- Expand pane horizontally
 vim.keymap.set('n', '<leader><leader>', ':vertical resize +4<CR>', { noremap = true, silent = true })
 
+-- remove all trailing whitespace
+vim.keymap.set('n', '<leader>tW', ':%s/\\s\\+$//e<CR>', { silent = true })
+
+-- Rotate pane
+vim.keymap.set('n', '<leader>wr', '<C-w>r', { desc = 'Rotate panels right' })
+vim.keymap.set('n', '<leader>wR', '<C-w>R', { desc = 'Rotate panels left' })
+vim.keymap.set('n', '<leader>wx', '<C-w>x', { desc = 'Exchange panels' })
+
