@@ -12,11 +12,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local _, wf = pcall(require, "vim.lsp._watchfiles")
-wf._watchfunc = function()
-    return function() end
-end
-
 -- Plugins Setting
 require("lazy").setup({
 
@@ -69,24 +64,15 @@ require("lazy").setup({
 		end,
 	},
 
-    -- lsp
+    -- lsp related
 	{
-		'williamboman/mason.nvim',
+		'williamboman/mason.nvim',  -- Management of LSP
 		config = function()
 		    require("mason").setup({})
         end,
 	},
-	{
-	    'neovim/nvim-lspconfig',
-	  	cmd = {'LspInfo', 'LspInstall', 'LspStart'},
-	  	event = {'BufReadPre', 'BufNewFile'},
-        dependencies = {
-	  	    {'hrsh7th/cmp-nvim-lsp'},
-        },
-	    config = function()
-            -- Required lsp in "nvim-cmp"
-	    end,
-	},
+
+    -- linter
 	{
 	    "mfussenegger/nvim-lint",
 	    event = { "BufReadPre", "BufNewFile" },
@@ -102,25 +88,22 @@ require("lazy").setup({
 	        })
 	    end,
 	},
+
+    -- auto completion
     {
         "hrsh7th/nvim-cmp",
 	  	-- event = 'InsertEnter',
+        dependencies = {
+            {'hrsh7th/cmp-nvim-lsp'},  -- Required for LSP integration
+        },
         config = function()
             local cmp = require("cmp")
             cmp.setup({
                 snippet = {
-                    -- REQUIRED - you must specify a snippet engine
                     expand = function(args)
-                      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-                      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-                      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-                      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-                      -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+                        -- Use native neovim snippets (Neovim 0.10+)
+                        vim.snippet.expand(args.body)
                     end,
-                },
-                window = {
-                    -- completion = cmp.config.window.bordered(),
-                    -- documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({
                     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -131,20 +114,23 @@ require("lazy").setup({
                 }),
                 sources = cmp.config.sources({
                     { name = 'nvim_lsp' },
-                    { name = 'vsnip' }, -- For vsnip users.
-                    -- { name = 'luasnip' }, -- For luasnip users.
-                    -- { name = 'ultisnips' }, -- For ultisnips users.
-                    -- { name = 'snippy' }, -- For snippy users.
                     }, {
                         { name = 'buffer' },
                 }),
             })
+
+            -- NATIVE LSP CONFIG (Neovim 0.11+)
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-            require('lspconfig').pyright.setup {
+
+            -- Python LSP (pyright)
+            vim.lsp.config.pyright = {
+                cmd = {'pyright-langserver', '--stdio'},
+                filetypes = {'python'},
+                root_markers = {'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', '.git'},
                 capabilities = capabilities,
                 handlers = {
                     ["textDocument/publishDiagnostics"] = function()
+                        -- Disable pyright diagnostics, let pylint handle linting
                     end
                 },
                 settings = {
@@ -157,30 +143,14 @@ require("lazy").setup({
                     },
                 },
             }
-            require("lspconfig").lua_ls.setup({
-                capabilities = capabilities
-            })
-            -- require("prettier").lua_ls.setup({
-            --     capabilities = capabilities,
-            --     bin = 'prettier', -- or `'prettierd'` (v0.23.3+)
-            --     filetypes = {
-            --         "css",
-            --         "graphql",
-            --         "html",
-            --         "javascript",
-            --         "javascriptreact",
-            --         "json",
-            --         "less",
-            --         "markdown",
-            --         "scss",
-            --         "typescript",
-            --         "typescriptreact",
-            --         "yaml",
-            --     },
-            -- })
+
+            -- Enable only pyright LSP server
+            vim.lsp.enable({'pyright'})
 
         end
     },
+
+    -- preview .md
     {
         "iamcco/markdown-preview.nvim",
         cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
