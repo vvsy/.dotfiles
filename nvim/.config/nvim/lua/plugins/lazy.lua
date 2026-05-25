@@ -21,6 +21,32 @@ require("lazy").setup({
 		dependencies = { 'rktjmp/lush.nvim' },
 
 	},
+    {
+        "wnkz/monoglow.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+          require("monoglow").setup({
+            on_colors = function(colors)
+              colors.glow = "#ffffff"
+              colors.blue1 = "#aaaaaa"
+              colors.blue2 = "#7a7a7a"
+            end,
+
+            on_highlights = function(hl, c)
+              -- Search results
+              hl.Search = vim.tbl_extend("force", hl.Search, { bold = true })
+              hl.IncSearch = vim.tbl_extend("force", hl.IncSearch, { bold = true })
+
+              -- Bracket matching
+              hl.MatchParen = vim.tbl_extend("force", hl.MatchParen, { bold = true })
+
+              -- LSP error diagnostics
+              hl.DiagnosticError = vim.tbl_extend("force", hl.DiagnosticError, { fg = c.glow, bold = true })
+            end,
+          })
+        end,
+    },
 
     -- fuzzy finder
 	{

@@ -1,6 +1,7 @@
 -- termguicolors required by zenbones
-vim.opt.termguicolors = true
-vim.cmd("colorscheme zenbones")
+-- vim.opt.termguicolors = true
+-- vim.cmd("colorscheme zenbones")
+vim.cmd("colorscheme monoglow")
 
 -- bufferline
 require("bufferline").setup{}
