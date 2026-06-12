@@ -5,3 +5,4 @@ foreground = #c1c1c1
 background = #000000
 cursor-color = #c1c1c1
 font-family = "Hack Nerd Font Mono Regular"
+font-feature = -calt

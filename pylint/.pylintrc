@@ -1,8 +1,0 @@
-[FORMAT]
-max-line-length = 80
-
-[MESSAGES CONTROL]
-# Disable some noisy messages
-# disable = missing-module-docstring,
-#           missing-function-docstring,
-#           missing-class-docstring

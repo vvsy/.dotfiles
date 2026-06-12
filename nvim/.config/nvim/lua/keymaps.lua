@@ -17,6 +17,12 @@ vim.keymap.set('n', '<leader><leader>', ':vertical resize +4<CR>', { noremap = t
 -- remove all trailing whitespace
 vim.keymap.set('n', '<leader>tW', ':%s/\\s\\+$//e<CR>', { silent = true })
 
+-- gitsigns
+vim.keymap.set('n', ']c', ':Gitsigns next_hunk<CR>', { silent = true })
+vim.keymap.set('n', '[c', ':Gitsigns prev_hunk<CR>', { silent = true })
+vim.keymap.set('n', '<leader>gh', ':Gitsigns preview_hunk<CR>', { silent = true })
+vim.keymap.set('n', '<leader>gr', ':Gitsigns reset_hunk<CR>', { silent = true })
+
 -- Rotate pane
 vim.keymap.set('n', '<leader>wr', '<C-w>r', { desc = 'Rotate panels right' })
 vim.keymap.set('n', '<leader>wR', '<C-w>R', { desc = 'Rotate panels left' })

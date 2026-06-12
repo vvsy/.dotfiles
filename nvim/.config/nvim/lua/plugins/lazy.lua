@@ -106,6 +106,16 @@ require("lazy").setup({
             require("lint").linters_by_ft = {
                 python = { "pylint" },
             }
+            require("lint").linters.pylint.args = vim.list_extend(
+                require("lint").linters.pylint.args,
+                {
+                    "--max-line-length=80",
+                    "--disable=import-outside-toplevel",
+                    -- "--disable=missing-module-docstring",
+                    -- "--disable=missing-function-docstring",
+                    -- "--disable=missing-class-docstring",
+                }
+            )
 	        vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
 	            group = _G.group,
 	            callback = function()
@@ -174,6 +184,16 @@ require("lazy").setup({
             vim.lsp.enable({'pyright'})
 
         end
+    },
+
+    -- git signs in gutter
+    { "lewis6991/gitsigns.nvim", config = true },
+
+    -- render markdown in buffer
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        opts = {},
     },
 
     -- preview .md
